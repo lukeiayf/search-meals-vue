@@ -4,16 +4,14 @@
             {{ letter }}
         </RouterLink>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 p-8">
-        <MealItem v-for="meal of meals" :key="meal.idMeal" :meal="meal" />
-    </div>
+    <Meals :meals="meals" />
 </template>
 
 <script setup>
-import MealItem from "../components/MealItem.vue"
-import {watch, computed, onMounted } from 'vue';
-import store from '../store';
+import { computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import Meals from '../components/Meals.vue';
+import store from '../store';
 
 const route = useRoute();
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
