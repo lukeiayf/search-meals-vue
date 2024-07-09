@@ -1,22 +1,27 @@
 import { fn } from '@storybook/test';
 import MealItem from '../components/MealItem.vue';
+import YoutubeButton from '../components/YoutubeButton.vue';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
-  title: 'MealItem',
-  component: MealItem,
-  tags: ['autodocs'],
-  argTypes: {
-    meal: Object
-  },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
+  component: MealItem
 };
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary = {
+  render: (args) => ({
+    components: { MealItem },
+    subcomponents: { YoutubeButton },
+    setup() {
+      return { args };
+    },
+    template: `
+    <MealItem v-bind="args"> 
+      <YoutubeButton :href="Youtube"/> 
+    </MealItem>`,
+  }),
   args: {
-    meal:{
+    meal: {
       "idMeal": "52823",
       "strMeal": "Salmon Prawn Risotto",
       "strDrinkAlternate": null,
