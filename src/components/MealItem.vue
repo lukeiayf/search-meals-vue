@@ -5,9 +5,7 @@
             </RouterLink>
             <div class="p-3">
                 <h3 class="font-bold">{{ meal.strMeal }}</h3>
-                <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia magnam harum perferendis
-                    nulla quam,
-                    nam inventore accusamus eligendi.</p>
+                <p class="mb-4">{{ instructions }}</p>
                 <div class="flex items-center justify-between">
                    <YoutubeButton :href="meal.strYoutube">YouTube</YoutubeButton>
                 </div>
@@ -15,10 +13,20 @@
         </div>
 </template>
 <script setup>
+import { computed } from 'vue';
 import YoutubeButton from '../components/YoutubeButton.vue';
 
 const { meal } = defineProps({
     meal:Object
+})
+
+const instructions = computed(() => {
+    const limit = 100; 
+      if (meal.strInstructions.length > limit) {
+        return meal.strInstructions.substring(0, limit) + '...';
+      } else {
+        return meal.strInstructions;
+      }
 })
 
 </script>
